@@ -1,0 +1,60 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+# Exclui arquivos temporários do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Exclui pastas de construção e compilação Java
+/target/
+/bin/
+
+# Exclui dependências (geralmente gerenciadas pelo Maven ou Gradle)
+/lib/
+/node_modules/ # Se usarmos Ant Design/React com npm/yarn
+
+# Arquivos de configuração da IDE (VS Code e outras)
+.vscode/
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Exclui arquivos de logs
+*.log
+
+# Exclui credenciais e configurações sensíveis
+# Seu arquivo de configuração de banco de dados (R4)
+config.properties
+connection.properties
