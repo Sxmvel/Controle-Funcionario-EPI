@@ -11,7 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
-
+import lombok.ToString;
 
 @Data
 @Entity
@@ -23,12 +23,14 @@ public class EntregaEPI {
     private Long id_entrega;
 
     @ManyToOne
-    @JoinColumn(name = "id_funcionario", nullable = false) // Mapeia a chave estrangeira 'id_funcionario'
-    private Funcionario funcionario; // Objeto Funcionario que recebeu o EPI
+    @JoinColumn(name = "id_funcionario", nullable = false)
+    @ToString.Exclude
+    private Funcionario funcionario;
 
     @ManyToOne
-    @JoinColumn(name = "id_epi", nullable = false) // Mapeia a chave estrangeira 'id_epi'
-    private EPI epi; // Objeto EPI que foi entregue
+    @JoinColumn(name = "id_epi", nullable = false)
+    @ToString.Exclude
+    private EPI epi;
 
     @Column(name = "data_entrega", nullable = false)
     private LocalDate dataEntrega;
@@ -38,4 +40,5 @@ public class EntregaEPI {
 
     @Column(name = "data_vencimento_epi")
     private LocalDate dataVencimentoEpi; // Vencimento do ITEM entregue (se aplicável)
+
 }

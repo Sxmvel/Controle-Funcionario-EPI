@@ -1,18 +1,23 @@
 package com.samuel_resende.controle_funcionario_EPI.Model;
 
 import java.time.LocalDate;
-
+import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
+
 
 @Data 
 @Entity // JPA mapeia a classe como entidade do banco de dados 
 @Table(name = "EPI")
+
 public class EPI {
 
 
@@ -37,4 +42,9 @@ public class EPI {
     // Coluna para a Data de Validade do Certificado de Aprovação
     @Column(name = "data_validade_ca")
     private LocalDate dataValidadeCa; 
+
+    @OneToMany(mappedBy = "epi", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude 
+    private List<EntregaEPI> entregas;
+    
 }
