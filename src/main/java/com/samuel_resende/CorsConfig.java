@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**s
+/**
  * Classe de configuração para permitir requisições de origem cruzada (CORS).
  * Essencial para o Frontend (React/Ant Design) acessar a API.
  */
