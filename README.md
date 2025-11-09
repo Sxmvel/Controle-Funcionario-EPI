@@ -16,20 +16,20 @@ utilizando componentes Ant Design.
 | :--- | :--- | :--- |
 | **Backend** | **Java (Spring Boot 3.x)** | Servidor RESTful, injeção de dependência e gerenciamento de transações. |
 | **Persistência** | **Spring Data JPA / Hibernate** | Mapeamento Objeto-Relacional. |
-| **Banco de Dados** | **MySQL** | [cite_start]Banco de dados relacional para persistência de dados. |
+| **Banco de Dados** | **MySQL** | Banco de dados relacional para persistência de dados. |
 | **Frontend** | **React.js + Vite** | Biblioteca para construção da interface de utilizador. |
 | **Design** | **Ant Design (AntD)** | Biblioteca de componentes para UI moderna e responsiva. |
 | **Ferramentas** | **Maven** | Gerenciamento de dependências e construção do projeto Java. |
 
 ### 1.2. Entidades e Relacionamentos
 
-[cite_start]O projeto cumpre o requisito de envolver pelo menos duas entidades com relacionamento  através de um modelo de dados robusto:
+O projeto cumpre o requisito de envolver pelo menos duas entidades com relacionamento  através de um modelo de dados robusto:
 
 | Entidade | Propósito | Chave Primária |
 | :--- | :--- | :--- |
 | **`Funcionario`** | Cadastro básico (Nome, CPF, Matrícula, Função). | `id_funcionario` |
 | **`EPI`** | Cadastro dos tipos de EPIs (Tipo, Nº CA, Validade). | `id_epi` |
-| **`EntregaEPI`** | [cite_start]**Tabela de Relacionamento N:N**. Registra quem (`id_funcionario`) recebeu qual EPI (`id_epi`), quando (`data_entrega`) e a quantidade. | `id_entrega` |
+| **`EntregaEPI`** | **Tabela de Relacionamento N:N**. Registra quem (`id_funcionario`) recebeu qual EPI (`id_epi`), quando (`data_entrega`) e a quantidade. | `id_entrega` |
 
 ## 2. Requisitos de Execução
 
