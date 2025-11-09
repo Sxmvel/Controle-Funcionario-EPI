@@ -1,112 +1,91 @@
 import React, { useState } from 'react';
 import { Layout, Menu, theme } from 'antd';
 import { UserOutlined, SafetyOutlined, BarsOutlined } from '@ant-design/icons';
-import { Outlet } from 'react-router-dom'; // Usaremos isso se implementarmos roteamento mais tarde, por agora é apenas um placeholder
+// Precisamos do useNavigate aqui para lidar com o clique do menu
+import { useNavigate, useLocation, Routes, Route } from 'react-router-dom'; 
+
+// Importa os componentes de página para serem usados nas rotas
+import FuncionarioPage from '../pages/FuncionarioPage.jsx';
+import EpiPage from '../pages/EpiPage.jsx'; 
+import EntregaPage from '../pages/EntregaPage.jsx'; 
+
 
 const { Header, Content, Footer, Sider } = Layout;
 
-// Dados de Navegação
 const menuItems = [
-    {
-        key: 'funcionarios',
-        icon: <UserOutlined />,
-        label: 'Funcionários',
-    },
-    {
-        key: 'epis',
-        icon: <SafetyOutlined />,
-        label: 'EPIs',
-    },
-    {
-        key: 'entregas',
-        icon: <BarsOutlined />,
-        label: 'Registrar Entrega',
-    },
+    { key: '/funcionarios', icon: <UserOutlined />, label: 'Funcionários' },
+    { key: '/epis', icon: <SafetyOutlined />, label: 'EPIs' },
+    { key: '/entregas', icon: <BarsOutlined />, label: 'Registrar Entrega' },
 ];
 
-const SharedLayout = ({ children, onSelectKey }) => {
-    // Definimos o estado para controlar se a barra lateral está colapsada
+const SharedLayout = () => {
+    const navigate = useNavigate(); // AGORA está dentro do Router e funciona!
+    const location = useLocation(); // Hook para saber a rota atual (para manter o menu ativo)
     const [collapsed, setCollapsed] = useState(false); 
     
-    // Tema do Ant Design para cores
-    const {
-        token: { colorBgContainer },
-    } = theme.useToken();
+    const { token: { colorBgContainer, borderRadiusLG } } = theme.useToken();
+    
+    const handleMenuClick = ({ key }) => {
+        navigate(key); // Navega para a nova rota
+    };
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
             
-            {/* -------------------- Barra Lateral (Sider) - Responsiva -------------------- */}
+            {/* -------------------- Sider (Barra Lateral) -------------------- */}
             <Sider 
                 collapsible 
                 collapsed={collapsed} 
-                onCollapse={(value) => setCollapsed(value)}
-                breakpoint="lg" // Colapsa automaticamente em telas grandes (Ex: 992px)
+                onCollapse={setCollapsed}
                 theme="dark"
-                // Responsividade: A barra lateral se torna um Drawer em telas pequenas
-                style={{
-                    overflow: 'auto', 
-                    height: '100vh',
-                    position: 'fixed',
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                }}
+                style={{ overflow: 'auto', height: '100vh' }}
             >
                 <div 
                     className="logo-vertical" 
-                    style={{ 
-                        height: 32, 
-                        margin: 16, 
-                        color: 'white', 
-                        textAlign: 'center', 
-                        lineHeight: '32px',
-                        fontSize: collapsed ? '14px' : '18px',
-                        transition: 'all 0.2s',
-                    }}>
+                    style={{ /* ... estilos ... */ }}>
                     {collapsed ? 'EPI' : 'Controle de EPI'}
                 </div>
                 
                 <Menu 
                     theme="dark" 
-                    defaultSelectedKeys={['funcionarios']} 
+                    // Usa a rota atual para manter o item ativo
+                    selectedKeys={[location.pathname]} 
                     mode="inline" 
                     items={menuItems} 
-                    onClick={({ key }) => onSelectKey(key)} // Passa a seleção para o componente pai
+                    onClick={handleMenuClick} 
+                    style={{ whiteSpace: 'nowrap' }} 
                 />
             </Sider>
 
-            {/* -------------------- Conteúdo Principal e Header -------------------- */}
-            <Layout style={{ marginLeft: collapsed ? 80 : 200, transition: 'margin-left 0.2s' }}>
-                
-                <Header 
-                    style={{ 
-                        padding: '0 24px', 
-                        background: colorBgContainer, 
-                        boxShadow: '0 1px 4px rgba(0, 21, 41, 0.08)',
-                        zIndex: 1, // Garante que o cabeçalho fique sobre o conteúdo
-                    }}
-                >
-                    {/* Aqui podemos adicionar um componente de Notificações ou Perfil futuramente */}
-                    <span style={{ fontSize: '1.2em' }}>Bem-vindo ao Dashboard</span>
+            <Layout>
+                <Header style={{ /* ... estilos ... */ }}>
+                    <span style={{ fontSize: '1.2em' }}>Dashboard de Controle</span>
                 </Header>
 
-                <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+                <Content style={{ margin: '16px' }}> 
                     <div
                         style={{
                             padding: 24,
-                            minHeight: 'calc(100vh - 160px)', // Ocupa a altura restante
+                            minHeight: 'calc(100vh - 120px)',
                             background: colorBgContainer, 
-                            borderRadius: '8px',
-                            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)', // Sutil elevação
+                            borderRadius: borderRadiusLG,
+                            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
                         }}
                     >
-                        {children}
+                        {/* -------------------- Rotas Aninhadas -------------------- */}
+                        <Routes>
+                            {/* Define as rotas que serão renderizadas no Content */}
+                            <Route path="/" element={<FuncionarioPage />} /> 
+                            <Route path="/funcionarios" element={<FuncionarioPage />} />
+                            <Route path="/epis" element={<EpiPage />} />
+                            <Route path="/entregas" element={<EntregaPage />} />
+                            <Route path="*" element={<h1>404 | Página Não Encontrada</h1>} />
+                        </Routes>
                     </div>
                 </Content>
 
-                <Footer style={{ textAlign: 'center' }}>
-                    Desenvolvimento Web ©{new Date().getFullYear()}
+                <Footer style={{ textAlign: 'center', padding: '12px 50px' }}>
+                    Desenvolvido por Samuel Resende ©{new Date().getFullYear()}
                 </Footer>
             </Layout>
         </Layout>
