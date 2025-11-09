@@ -2,8 +2,6 @@ package com.samuel_resende.controle_funcionario_EPI.Model;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -17,13 +15,11 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.ToString;
 
-
 @Data 
 @Entity // JPA mapeia a classe como entidade do banco de dados 
 @Table(name = "EPI")
 @JsonIgnoreProperties({"entregas"})
 public class EPI {
-
 
     // Chave Primária (PK)
     @Id

@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin; // NOVO: Para permissão CORS
+import org.springframework.web.bind.annotation.CrossOrigin; 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,17 +20,12 @@ import com.samuel_resende.controle_funcionario_EPI.Model.EntregaEPI;
 import com.samuel_resende.controle_funcionario_EPI.Service.EntregaEpiService;
 
 @RestController
-@RequestMapping("/api/entregas") // Endpoint base: /api/entregas
-// NOVO: Adiciona a permissão CORS diretamente no Controller para o Frontend
+@RequestMapping("/api/entregas") 
 @CrossOrigin(origins = {"http://localhost:5173", "http://127.0.0.1:5173"}) 
 public class EntregaEpiController {
 
     @Autowired
     private EntregaEpiService entregaEpiService;
-
-    // -----------------------------------------------------------------
-    // CRUD BÁSICO (C, R, U, D)
-    // -----------------------------------------------------------------
 
     // C: CREATE (POST /api/entregas)
     @PostMapping
@@ -87,13 +82,11 @@ public class EntregaEpiController {
         }
     }
     
-  
     @GetMapping("/historico/funcionario/{idFuncionario}")
     public ResponseEntity<List<EntregaEPI>> getHistoricoByFuncionario(@PathVariable Long idFuncionario) {
         List<EntregaEPI> historico = entregaEpiService.buscarHistoricoPorFuncionario(idFuncionario);
         
         if (historico.isEmpty()) {
-            // Retorna 404 se não houver registros (o que é normal se não houver entregas)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
         }
         return new ResponseEntity<>(historico, HttpStatus.OK);

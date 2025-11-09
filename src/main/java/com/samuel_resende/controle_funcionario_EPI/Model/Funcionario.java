@@ -2,9 +2,7 @@ package com.samuel_resende.controle_funcionario_EPI.Model;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,11 +22,9 @@ import lombok.ToString;
 
 @Table(name = "Funcionario")
 
-
 public class Funcionario {
 
     // atributos da entidade funcionario.
-
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id_funcionario;

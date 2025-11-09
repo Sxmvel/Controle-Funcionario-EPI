@@ -3,11 +3,9 @@ package com.samuel_resende.controle_funcionario_EPI.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.samuel_resende.controle_funcionario_EPI.Model.EPI;
 import com.samuel_resende.controle_funcionario_EPI.Repository.EpiRepository;
 
@@ -34,8 +32,6 @@ public class EpiService {
     public List<EPI> buscarTodos() {
         return epiRepository.findAll();
     }
-
-
     // R: READ le id
 
     public Optional<EPI> buscarPorId(Long id) {
@@ -61,7 +57,6 @@ public class EpiService {
             return null; 
         }
     }
-
     // D: DELETE (Excluir)
 
     @Transactional

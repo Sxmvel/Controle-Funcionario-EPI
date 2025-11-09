@@ -39,7 +39,6 @@ public class FuncionarioController {
         }
     }
 
-
     // R: READ 
     @GetMapping
     public ResponseEntity<List<Funcionario>> getAllFuncionarios() {
@@ -61,14 +60,12 @@ public class FuncionarioController {
         }
     }
 
-
     // U: UPDATE (Atualizar Funcionário por ID)
     // PUT /api/funcionarios/{id}
-   
     @PutMapping("/{id}")
     public ResponseEntity<Funcionario> updateFuncionario(@PathVariable Long id, @RequestBody Funcionario funcionarioDetalhes) {
         Funcionario funcionarioAtualizado = funcionarioService.atualizar(id, funcionarioDetalhes);
-        
+     
         if (funcionarioAtualizado != null) {
             return new ResponseEntity<>(funcionarioAtualizado, HttpStatus.OK);
         } else {
@@ -79,7 +76,6 @@ public class FuncionarioController {
 
     // D: DELETE (Deletar Funcionário por ID)
     // DELETE /api/funcionarios/{id}
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFuncionario(@PathVariable Long id) {
         boolean deletado = funcionarioService.deletar(id);

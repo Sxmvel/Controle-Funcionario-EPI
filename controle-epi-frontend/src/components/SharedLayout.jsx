@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Layout, Menu, theme } from 'antd';
 import { UserOutlined, SafetyOutlined, BarsOutlined } from '@ant-design/icons';
-// Precisamos do useNavigate aqui para lidar com o clique do menu
 import { useNavigate, useLocation, Routes, Route } from 'react-router-dom'; 
 
 // Importa os componentes de página para serem usados nas rotas
@@ -14,19 +13,20 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const menuItems = [
     { key: '/funcionarios', icon: <UserOutlined />, label: 'Funcionários' },
-    { key: '/epis', icon: <SafetyOutlined />, label: 'EPIs' },
+    { key: '/epis', icon: '/epis', icon: <SafetyOutlined />, label: 'EPIs' },
     { key: '/entregas', icon: <BarsOutlined />, label: 'Registrar Entrega' },
 ];
 
 const SharedLayout = () => {
-    const navigate = useNavigate(); // AGORA está dentro do Router e funciona!
-    const location = useLocation(); // Hook para saber a rota atual (para manter o menu ativo)
+    const navigate = useNavigate();
+    const location = useLocation();
     const [collapsed, setCollapsed] = useState(false); 
     
+    // Pega as cores do tema
     const { token: { colorBgContainer, borderRadiusLG } } = theme.useToken();
     
     const handleMenuClick = ({ key }) => {
-        navigate(key); // Navega para a nova rota
+        navigate(key); 
     };
 
     return (
@@ -42,13 +42,21 @@ const SharedLayout = () => {
             >
                 <div 
                     className="logo-vertical" 
-                    style={{ /* ... estilos ... */ }}>
+                    style={{ 
+                        height: 32, 
+                        margin: 16, 
+                        color: 'white', 
+                        textAlign: 'center', 
+                        lineHeight: '32px',
+                        fontSize: '18px',
+                        overflow: 'hidden',
+                        background: 'rgba(255, 255, 255, 0.2)'
+                    }}>
                     {collapsed ? 'EPI' : 'Controle de EPI'}
                 </div>
                 
                 <Menu 
                     theme="dark" 
-                    // Usa a rota atual para manter o item ativo
                     selectedKeys={[location.pathname]} 
                     mode="inline" 
                     items={menuItems} 
@@ -57,9 +65,30 @@ const SharedLayout = () => {
                 />
             </Sider>
 
+            {/* -------------------- Layout Principal (Conteúdo) -------------------- */}
             <Layout>
-                <Header style={{ /* ... estilos ... */ }}>
-                    <span style={{ fontSize: '1.2em' }}>Dashboard de Controle</span>
+                
+                {/* CORREÇÃO DO HEADER: Centraliza e aumenta o contraste */}
+                <Header 
+                    style={{ 
+                        padding: '0 24px', 
+                        background: colorBgContainer, 
+                        boxShadow: '0 1px 4px rgba(0, 21, 41, 0.08)',
+                        zIndex: 1, 
+                        display: 'flex', // Habilita flexbox
+                        alignItems: 'center', // Centraliza verticalmente
+                        // CORREÇÃO: Alinhamento horizontal para destaque
+                        justifyContent: 'center', 
+                    }}
+                >
+                    <span 
+                        style={{ 
+                            fontSize: '1.5em', // Aumenta o tamanho
+                            fontWeight: 'bold', // Deixa mais forte
+                            color: '#333333' // Cor escura para alto contraste
+                        }}>
+                        DASHBOARD DE CONTROLE
+                    </span>
                 </Header>
 
                 <Content style={{ margin: '16px' }}> 
@@ -74,7 +103,6 @@ const SharedLayout = () => {
                     >
                         {/* -------------------- Rotas Aninhadas -------------------- */}
                         <Routes>
-                            {/* Define as rotas que serão renderizadas no Content */}
                             <Route path="/" element={<FuncionarioPage />} /> 
                             <Route path="/funcionarios" element={<FuncionarioPage />} />
                             <Route path="/epis" element={<EpiPage />} />

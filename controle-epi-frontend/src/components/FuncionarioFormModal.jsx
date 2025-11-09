@@ -5,13 +5,13 @@ import dayjs from 'dayjs'; // Biblioteca para manipulação de datas
 
 const { Option } = Select;
 
-// Lista de funções (pode ser carregada dinamicamente, mas será fixa por agora)
+// Lista de funções (pode ser carregada dinamicamente, mas será fixa )
 const funcoesMock = ['Operador de Máquinas', 'Técnico de Segurança', 'Gerente de Obra', 'Administrativo'];
 
 const FuncionarioFormModal = ({ visible, onClose, onSave, editingFuncionario }) => {
     const [form] = Form.useForm();
     
-    // Efeito para preencher o formulário se estivermos em modo de edição
+    // Efeito para preenchero  formulário se estivermos em modo de edição
     useEffect(() => {
         if (visible && editingFuncionario) {
             // Mapeia os dados do objeto Funcionario para o formulário
@@ -46,7 +46,6 @@ const FuncionarioFormModal = ({ visible, onClose, onSave, editingFuncionario }) 
             message.error('Por favor, preencha todos os campos obrigatórios corretamente.');
         }
     };
-
     return (
         <Modal
             title={editingFuncionario ? "Editar Funcionário" : "Novo Cadastro de Funcionário"}
@@ -111,5 +110,4 @@ const FuncionarioFormModal = ({ visible, onClose, onSave, editingFuncionario }) 
         </Modal>
     );
 };
-
 export default FuncionarioFormModal;

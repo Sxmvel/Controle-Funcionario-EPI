@@ -10,21 +10,21 @@ import org.springframework.transaction.annotation.Transactional;
 import com.samuel_resende.controle_funcionario_EPI.Model.Funcionario;
 import com.samuel_resende.controle_funcionario_EPI.Repository.FuncionarioRepository;
 
-@Service // Marca a classe como Serviço do Spring.
+@Service 
 public class FuncionarioService {
 
-    @Autowired // Injeta a dependência do Repositório
+    @Autowired
     private FuncionarioRepository funcionarioRepository;
 
 
     // C: CREATE (Criar/Salvar)
-    @Transactional // Garante que a operação seja atômica
+    @Transactional 
     public Funcionario salvar(Funcionario funcionario) {
 
         return funcionarioRepository.save(funcionario); // Salva no banco
     }
 
-    // R: READ ALL (Ler Todos)
+    // R: READ ALL
     public List<Funcionario> buscarTodos() {
         return funcionarioRepository.findAll();
     }

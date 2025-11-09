@@ -1,12 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
-import './index.css'; // Mantenha o CSS padrão
-// Mantenha o App.css que criamos (importado via App.jsx ou index.js)
+import './index.css'; 
 
-// --- NOVO: Importações do Ant Design ---
 import { ConfigProvider } from 'antd';
-// Importa as configurações de localização (Português)
 import ptBR from 'antd/locale/pt_BR'; 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

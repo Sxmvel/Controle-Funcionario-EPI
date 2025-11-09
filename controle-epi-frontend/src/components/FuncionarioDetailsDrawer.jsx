@@ -13,7 +13,6 @@ const epiColumns = [
     { title: 'Vencimento Item', dataIndex: 'dataVencimentoEpi', key: 'dataVencimentoEpi', render: (text) => text ? new Date(text).toLocaleDateString('pt-BR') : 'N/A' },
 ];
 
-
 const FuncionarioDetailsDrawer = ({ visible, onClose, funcionarioId }) => {
     const [funcionario, setFuncionario] = useState(null);
     const [historicoEPIs, setHistoricoEPIs] = useState([]); 
@@ -77,7 +76,6 @@ const FuncionarioDetailsDrawer = ({ visible, onClose, funcionarioId }) => {
                     <Alert message="Erro de Carregamento" description={error} type="error" showIcon />
                 ) : funcionario ? ( // Se não houver erro E houver funcionário
                     <Space direction="vertical" style={{ width: '100%' }} size="large">
-                        
                         {/* Informações Pessoais (Design Limpo) */}
                         <Card title={<Text strong>Dados Pessoais</Text>} size="small">
                             <Descriptions bordered column={1} size="small">
@@ -100,7 +98,6 @@ const FuncionarioDetailsDrawer = ({ visible, onClose, funcionarioId }) => {
                             size="small"
                             locale={{ emptyText: 'Nenhum registro de entrega encontrado para este colaborador.' }}
                         />
-
                     </Space>
                 ) : (
                     // Se não estiver carregando, mostra a mensagem de seleção

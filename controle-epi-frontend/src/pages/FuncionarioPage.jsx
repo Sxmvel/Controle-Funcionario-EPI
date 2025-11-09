@@ -8,7 +8,6 @@ import FuncionarioFormModal from '../components/FuncionarioFormModal';
 const { Title, Text } = Typography;
 const { Meta } = Card;
 
-// Dados Falsos (Mock) para garantir que o layout carregue em caso de falha da API
 const mockFuncionarios = [
     { key: 1, id_funcionario: 1, nome: 'João da Silva', matricula: 'M1001', funcao: 'Operador de Máquinas', dataContratacao: '2023-01-15' },
     { key: 2, id_funcionario: 2, nome: 'Maria Oliveira', matricula: 'M1002', funcao: 'Técnico de Segurança', dataContratacao: '2022-05-20' },
@@ -27,9 +26,7 @@ const FuncionarioPage = () => {
     const [selectedFuncionarioId, setSelectedFuncionarioId] = useState(null);
     const [editingFuncionario, setEditingFuncionario] = useState(null); 
 
-    // -----------------------------------------------------------------
     // FUNÇÕES CRUD E CONEXÃO
-    // -----------------------------------------------------------------
     
     // READ ALL (Função que busca todos os funcionários)
     const fetchFuncionarios = async () => {
@@ -111,9 +108,7 @@ const FuncionarioPage = () => {
         fetchFuncionarios();
     }, []);
 
-    // -----------------------------------------------------------------
     // ESTRUTURA VISUAL: CARDS E BOTÕES ARREDONDADOS
-    // -----------------------------------------------------------------
     return (
         <Space direction="vertical" style={{ width: '100%' }} size="large">
             
@@ -222,5 +217,4 @@ const FuncionarioPage = () => {
         </Space>
     );
 };
-
 export default FuncionarioPage;
